@@ -19,6 +19,15 @@ import './backlogs/task';
 import './backlogs/impediment';
 import './backlogs/taskboard';
 import './backlogs/show_main';
+import { createRoot, Root } from 'react-dom/client';
+import React from 'react';
+import BacklogsContainer from '../../../react/backlogs/BacklogsContainer';
 
 export default class BacklogsController extends Controller {
+
+  connect(): void {
+    const reactRoot = document.getElementById("taskboard2")!
+    createRoot(reactRoot).render(React.createElement(BacklogsContainer, {}))
+  }
+
 }
