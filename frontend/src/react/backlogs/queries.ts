@@ -60,6 +60,7 @@ export interface Story {
   status_id:number;
   type_id:number;
   version_id:number;
+  position:number;
 }
 export interface Backlog {
   sprint:Sprint;

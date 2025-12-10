@@ -40,3 +40,32 @@ export function useSubmitForm(projectId:string, sprintId:string, storyId:string)
     },
   });
 }
+
+export function useSubmitForm2(projectId:string, sprintId:string|number) {
+   const csrfToken = useMetaContent('csrf-token');
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (story:Partial<Story> & { id:string|number}) => {
+      const response = await fetch(`/projects/${projectId}/sprints/${sprintId}/stories/${story.id}.json`, {
+        method: 'PATCH',
+        headers: { 
+          'Content-Type': 'application/json',
+          'X-Authentication-Scheme': 'Session',
+          'X-CSRF-Token': csrfToken
+        },
+        body: JSON.stringify(story),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit');
+      }
+
+      return response.json();
+    },
+    onSuccess: () => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries({ queryKey: ['backlogs', projectId] });
+    },
+  }); 
+}
