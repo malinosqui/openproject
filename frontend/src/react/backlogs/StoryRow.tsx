@@ -83,9 +83,8 @@ export function StoryRow({
     end: (item, monitor) => {
       if (!monitor.didDrop()) return;
 
-      const newPos = getCurrentPosition(item.id);
-
-      updatePosition(item.id,  newPos);
+      // Use the index that was updated during hover, not getCurrentPosition
+      updatePosition(item.id, item.index);
     },
 
     collect: monitor => ({
