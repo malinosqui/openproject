@@ -208,7 +208,7 @@ See COPYRIGHT and LICENSE files for more details.
       </div>
     </div>
   <% when "ProjectCustomField" %>
-    <div class="form--field" <%= format_dependent.attributes(:hasComment) %>>
+    <div class="form--field">
       <%= f.check_box :has_comment %>
       <div class="form--field-instructions">
         <p><%= t("custom_fields.instructions.has_comment.project") %></p>
