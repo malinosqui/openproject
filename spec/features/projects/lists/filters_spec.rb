@@ -497,6 +497,9 @@ RSpec.describe "Projects list filters", :js, with_settings: { login_required?: f
 
   describe "user cf filter" do
     let(:some_user) { create(:user, member_with_roles: { project => [project_role] }) }
+    let!(:some_group) { create(:group, member_with_roles: { project => [project_role] }) }
+    let!(:some_placeholder) { create(:placeholder_user, member_with_roles: { project => [project_role] }) }
+
     let!(:user_cf) do
       create(:user_project_custom_field,
              name: "A user CF",
@@ -513,11 +516,13 @@ RSpec.describe "Projects list filters", :js, with_settings: { login_required?: f
       projects_page.expect_projects_listed(project)
     end
 
-    it "displays the visible project members as available options" do
+    it "displays the visible project members, groups and placeholders as available options" do
       load_and_open_filters manager
 
       expected_options = [
         { name: some_user.name, email: some_user.mail },
+        { name: some_placeholder.name },
+        { name: some_group.name },
         { name: manager.name, email: manager.mail }
       ]
 
