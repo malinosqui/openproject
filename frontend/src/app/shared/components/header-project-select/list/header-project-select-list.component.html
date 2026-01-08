@@ -47,17 +47,17 @@
               }
             }
           }
-        </span>
-        @if (currentProjectService.id === project.id.toString()) {
-          <a
-            [href]="extendedUrl(null)"
-            data-test-selector="op-header-project-select--item-remove-icon"
-            >
-            <svg
-              x-circle-icon
-              size="small"
-            ></svg></a>
+          @if (currentProjectService.id === project.id.toString()) {
+            <a
+              [href]="extendedUrl(null)"
+              data-test-selector="op-header-project-select--item-remove-icon" >
+              <svg
+                x-circle-icon
+                size="small"
+              ></svg>
+            </a>
           }
+        </span>
         </a>
       }
       @if (project.disabled) {
