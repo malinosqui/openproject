@@ -1,0 +1,9 @@
+.full-view-page-layout
+  display: grid
+  grid-template-columns: 1fr 2fr
+  column-gap: 24px
+
+  @media screen and (max-width: $breakpoint-lg)
+    display: grid
+    grid-template-columns: unset
+    grid-template-rows: auto 1fr
